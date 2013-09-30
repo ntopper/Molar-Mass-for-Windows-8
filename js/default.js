@@ -390,8 +390,7 @@ function initializeSettings() {
     mass[117] = 294.00;
     mass[118] = 294.00;
 
-    var last = [1, 5, 6, 7, 8, 9, 15, 16, 19, 23, 39, 53, 74, 92];  //These are the atomic numbers of the elements who's symbols are within the simbols oth other elements
-    //for instance, H (hyfrogen) is withing He (Helium)
+    var last = [1, 5, 6, 7, 8, 9, 15, 16, 19, 23, 39, 53, 74, 92];  //These are the atomic numbers of the single letter elements, H, K, P, S, Ect.
 
     app.onactivated = function (args) {
         if (args.detail.kind === activation.ActivationKind.launch) {
@@ -425,8 +424,6 @@ function initializeSettings() {
             }
             args.setPromise(WinJS.UI.processAll());
         }
-
-        var last = [1, 5, 6, 7, 8, 9, 15, 16, 19, 23, 39, 53, 74, 92];  //These are the atomic numbers of te single letter element symbols, used when parsing input strings
 
         /*
         ***********************************************************
@@ -577,7 +574,7 @@ function initializeSettings() {
         ***********************************************************
         */
 
-        //returns true only if paramater is a valid molecular formula
+        //returns true only if parameter is a valid molecular formula
         function validate(str) {
 
             //remove whitespace
@@ -586,7 +583,7 @@ function initializeSettings() {
 
 
 
-            //Regect a string with empty parathisis: ()
+            //Reject a string with empty parenthesis: ()
 
             if (str.match(/\(\)/g)) {
 
@@ -594,7 +591,7 @@ function initializeSettings() {
 
             }
 
-            //A valid molecular formula can not have a co-efficant after an open perenthisis, no numbers after open parenthisis
+            //A valid molecular formula can not have a coefficient after an open parenthesis, no numbers after open parenthesis
 
             if (str.match(/\([0-9]/g)) {
 
@@ -614,13 +611,13 @@ function initializeSettings() {
 
 
 
-            //if the nested parenthisis are correct and the string is not null:
+            //if the nested parenthesis are correct and the string is not null:
 
             if (nesting(str) && str) {
 
 
 
-                //remove numbers and parenthisis
+                //remove numbers and parenthesis
 
                 str = str.replace(/[0-9\(\) ]/g, '');
 
@@ -680,7 +677,7 @@ function initializeSettings() {
 
         }
 
-        //returns true if the parentetical delemeters math
+        //returns true if the parenthetical delimiters math
         function nesting(str) {
 
             var nesting = 0;
@@ -784,7 +781,7 @@ function initializeSettings() {
         ***********************************************************
         ***********************************************************
         */
-        //takes an element name, outputs it's symbol
+        //takes an element name, returns its symbol
         function replaceName(str) {
 
             for (var i = 1; i <= 118; i++) {
@@ -899,7 +896,7 @@ EVENT HANDLILG
                 document.getElementById("hide").style.display = "block";//unhide the hidden text
                 document.getElementById("under").innerText = "";//the text under the input becomes blank
                 
-                resetSize();//reset the size f the higlighted element symbols on the table
+                resetSize();//reset the size of the higlighted element symbols on the table
 
                 var right_header = formula;
                 if (right_header != element(right_header)) {//if the header is a single element
