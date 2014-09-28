@@ -1,5 +1,3 @@
-﻿
-
 function initializeSettings() {
     // Initialize all settings flyouts and WinJS controls.
     WinJS.UI.processAll();
@@ -18,14 +16,13 @@ function initializeSettings() {
 (function () {
     "use strict";
 
-
-    var table = false;
+    var table = false;//do I show the periodic table?
 
     WinJS.Binding.optimizeBindingReferences = true;
-
     var app = WinJS.Application;
     var activation = Windows.ApplicationModel.Activation;
 
+    //list of symbols ordered by atomic number
     var symbols = new Array();
     symbols[0] = [null];
     symbols[1] = ['H'];
@@ -147,8 +144,8 @@ function initializeSettings() {
     symbols[117] = ['Uus'];
     symbols[118] = ['Uuo'];
 
+    //element names ordered by atomic number
     var name = new Array();
-
     name[0] = null;
     name[1] = "Hydrogen";
     name[2] = "Helium";
@@ -269,6 +266,7 @@ function initializeSettings() {
     name[117] = "Ununseptium";
     name[118] = "Ununoctium";
 
+    //atomic mass ordered by atomic number
     var mass = new Array();
     mass[0] = null;
     mass[1] = 1.0079;
@@ -403,12 +401,10 @@ function initializeSettings() {
                     WinJS.UI.SettingsFlyout.populateSettings(e);
                 };
 
-                // This application has been newly launched. Initialize
-                // your application here.
+                // This application has been newly launched.
                 var outputValue = WinJS.Application.sessionState.formula;
                 if (outputValue) {
                     document.getElementById("nameInput").innerText = outputValue;
-
                     evaluate(outputValue);
                 }
             } else {
@@ -578,13 +574,11 @@ function initializeSettings() {
         function validate(str) {
 
             //remove whitespace
-
             str = str.replace(/ /g, '');
 
 
 
             //Reject a string with empty parenthesis: ()
-
             if (str.match(/\(\)/g)) {
 
                 return false;
@@ -592,7 +586,6 @@ function initializeSettings() {
             }
 
             //A valid molecular formula can not have a coefficient after an open parenthesis, no numbers after open parenthesis
-
             if (str.match(/\([0-9]/g)) {
 
                 return false;
@@ -602,7 +595,6 @@ function initializeSettings() {
 
 
             //A valid molecular formula can not begin with a number
-
             if (str[0] && str[0].match(/[0-9]/g)) {
 
                 return false;
@@ -627,24 +619,15 @@ function initializeSettings() {
 
 
 
-                //All valid element symbols are removed
-
-                //a valid input will end up as a blank string
-
-
-
+                //all valid element symbols are removed
+                //therefor a valid input will result in an empty string
                 //Itterate threw every element symbol.
-
                 for (var i = 1; i <= 118; i++) {
 
 
-
                     //We skip the single letter elements first so that we do not remove a partial symbol
-
                     if (!isin(i, last)) { //the is-in function is used to skip over the single letter elements
-
                         regex = RegExp(symbols[i], 'g');
-
                         str = str.replace(regex, '');
 
                     }
@@ -654,7 +637,6 @@ function initializeSettings() {
 
 
                 //we now remove the rest of the symbols
-
                 for (var i = 0; i <= 14; i++) {
 
                     regex = RegExp(symbols[last[i]], 'g');
@@ -666,13 +648,10 @@ function initializeSettings() {
 
 
                 //if we are left with nothing, the input was valid
-
                 return (str == '');
 
             } else {
-
                 return false;
-
             }
 
         }
@@ -717,6 +696,7 @@ function initializeSettings() {
         }
 
         //one last layer of santization
+        //evaluated statement should only have numbers, '.', '+', '(', ')', and *
         function safeEval(str) {
             str = str.replace(/[^0-9\+()\*\. ]/g, "");
             try {
@@ -728,6 +708,7 @@ function initializeSettings() {
             }
             return str;
         }
+
         /*
         ***********************************************************
         ***********************************************************
@@ -973,5 +954,3 @@ EVENT HANDLILG
 
     app.start();
 })();
-
-
