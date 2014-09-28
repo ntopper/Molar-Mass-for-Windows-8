@@ -1,7 +1,7 @@
 Molar-Mass-for-Windows-8
 ========================
 
-A Molar Mass Calculator for Windows 8
+A Molar Mass Calculator for Windows 8   
 http://apps.microsoft.com/windows/en-us/app/4e0e5ee7-833a-496e-85dd-7ad448a4d72a
 
 This was one of my first experemnts with javascript, jquery, and DOM. Iv'e removed the ads and decided to make the source code public.
